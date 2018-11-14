@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FunFlow</string>
+    <string name="ButtonCategory">Category</string>
+    <string name="ImageCard">ImageCard</string>
+    <string name="Item">Item</string>
 </resources>

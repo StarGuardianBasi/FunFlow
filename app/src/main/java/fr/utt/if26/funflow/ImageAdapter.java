@@ -1,29 +1,33 @@
 package fr.utt.if26.funflow;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 
-public class ImageAdapter extends BaseAdapter {
+import java.util.ArrayList;
 
-    private Context mContext;
-    private Integer[] images = {
-            R.drawable.sample_0, R.drawable.sample_1, R.drawable.sample_2,R.drawable.sample_3,R.drawable.sample_4,R.drawable.sample_5, R.drawable.sample_6, R.drawable.sample_7
-    };
+public class ImageAdapter extends ArrayAdapter<Integer> {
 
-    ImageAdapter (Context c){
-        mContext = c;
+    private Context c;
+    private ArrayList<Integer> images;
+
+    ImageAdapter(Context context, int resource, ArrayList<Integer> objects) {
+        super(context, resource, objects);
+        this.images = objects;
+        this.c = context;
     }
     @Override
     public int getCount() {
-        return images.length;
+        return images.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Integer getItem(int i) {
+        return images.get(i);
     }
 
     @Override
@@ -32,20 +36,11 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        ImageView imageView;
-        if (view == null)
-        {
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(170,170));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8,8,8,8);
-        }
-        else {
-            imageView = (ImageView) view;
-        }
-
-        imageView.setImageResource(images[position]);
-        return imageView;
+    public View getView(int position, View view, ViewGroup parent) {
+        LayoutInflater inflater = ((Activity) c).getLayoutInflater();
+        View v = inflater.inflate(R.layout.category, parent, false);
+        ImageButton ib = v.findViewById(R.id.imageButton);
+        //set l'image correspondant au bouton
+        return v;
     }
 }

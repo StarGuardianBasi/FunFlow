@@ -1,8 +1,5 @@
 package fr.utt.if26.funflow.databaseAccessHub.exceptions;
 
-/**
- * Exception that checks if
- */
 public class DBControllerNotOpenException extends Exception {
     /**
      * Exception that notifies if a DB controller is not open when the user wants to use an action on it

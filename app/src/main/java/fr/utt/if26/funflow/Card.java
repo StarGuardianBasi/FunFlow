@@ -14,7 +14,7 @@ public class Card {
 
     private String author;
     private int rating;
-    private Categorie categorie;
+    private Category category;
     private List<Task> tasks;
 
     public Card(){
@@ -28,7 +28,7 @@ public class Card {
                 Date releaseDate,
                 String author,
                 int rating,
-                Categorie categorie,
+                Category category,
                 List<Task> tasks){
 
         this.id = id;
@@ -38,7 +38,7 @@ public class Card {
         this.releaseDate = releaseDate;
         this.author = author;
         this.rating = rating;
-        this.categorie = categorie;
+        this.category = category;
         this.tasks = tasks;
     }
 
@@ -49,7 +49,7 @@ public class Card {
                 Date releaseDate,
                 String author,
                 int rating,
-                Categorie categorie){
+                Category category){
 
         this.id = id;
         this.name = name;
@@ -58,7 +58,7 @@ public class Card {
         this.releaseDate = releaseDate;
         this.author = author;
         this.rating = rating;
-        this.categorie = categorie;
+        this.category = category;
         this.tasks = new ArrayList<Task>();
     }
 
@@ -90,8 +90,8 @@ public class Card {
         return rating;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public Category getCategory() {
+        return category;
     }
 
     public List<Task> getTasks() {
@@ -130,8 +130,8 @@ public class Card {
         this.rating = rating;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setTasks(List<Task> tasks) {

@@ -35,6 +35,8 @@ public class DBController {
     private CategoryDAO categoryDAO;
     private TaskDAO taskDAO;
 
+    private boolean open;
+
 
     /**
      * Database controller using basic DAO architecture
@@ -42,17 +44,19 @@ public class DBController {
      */
     public DBController(Context context){
         model = new DatabaseHelper(context, DBNAME, null, VERSION);
+        open = false;
     }
 
     /**
      * opens the dbController
      */
     public void open() throws DBControllerAlreadyOpenException {
-        if (!db.isOpen()) {
+        if (!open) {
             db = model.getWritableDatabase();
             categoryDAO = new CategoryDAO(db);
             taskDAO = new TaskDAO(db);
             cardDAO = new CardDAO(db);
+            open = true;
         }
 
         else{
@@ -64,11 +68,12 @@ public class DBController {
      * closes the dbController. what more do you want mate.
      */
     public void close(){
-        if (db.isOpen()){
+        if (open){
             db.close();
             cardDAO = null;
             taskDAO = null;
             categoryDAO = null;
+            open = false;
         }
     }
 

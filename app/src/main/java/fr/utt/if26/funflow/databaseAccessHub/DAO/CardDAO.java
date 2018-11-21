@@ -51,6 +51,10 @@ public class CardDAO extends SQLiteDAO<Card> {
 
         DateFormat df = new SimpleDateFormat(dateFormatSyntax);
 
+        if (obj.getReleaseDate() == null){
+            obj.setReleaseDate(new Date());
+        }
+
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.CARD_COL_NAME, obj.getName());
         values.put(DatabaseHelper.CARD_COL_CATEGORIE, obj.getCategory().getId());
@@ -75,6 +79,10 @@ public class CardDAO extends SQLiteDAO<Card> {
         if (obj == null) throw new NullPointerException("card object is not initialized");
 
         DateFormat df = new SimpleDateFormat(dateFormatSyntax);
+
+        if (obj.getReleaseDate() == null){
+            obj.setReleaseDate(new Date());
+        }
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.CARD_COL_NAME, obj.getName());

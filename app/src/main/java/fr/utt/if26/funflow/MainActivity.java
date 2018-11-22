@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         gridViewMain = findViewById(R.id.MainGrid);
         ArrayList<Integer> list = new ArrayList<Integer>() {{
-            add(R.drawable.sample_0);
-            add(R.drawable.sample_1);
-            add(R.drawable.sample_2);
         }};
         ImageAdapter imgAdpt  = new ImageAdapter(this,R.layout.category,list);
         gridViewMain.setAdapter(imgAdpt);

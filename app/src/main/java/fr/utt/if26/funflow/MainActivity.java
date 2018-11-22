@@ -6,12 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import java.util.ArrayList;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.utt.if26.funflow.databaseAccessHub.DBController;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DAOAlreadyExistsException;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DBControllerAlreadyOpenException;
@@ -26,27 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        gridViewMain = findViewById(R.id.MainGrid);
-        ArrayList<Integer> list = new ArrayList<Integer>() {{
-            add(R.drawable.sample_0);
-            add(R.drawable.sample_1);
-            add(R.drawable.sample_2);
-        }};
-        ImageAdapter imgAdpt  = new ImageAdapter(this,R.layout.category,list);
-        gridViewMain.setAdapter(imgAdpt);
-        gridViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Récupérer la clé permettant d'avoir les data
-                Intent intent = new Intent(MainActivity.this, DataListActivity.class);
-                intent.putExtra("category",view.toString());
-                startActivity(intent);
-            }
-        });
-
         this.controller = new DBController(this);
-
         try{
             this.controller.open();
             Category movie = new Category(0, "Movie", "");
@@ -81,5 +56,24 @@ public class MainActivity extends AppCompatActivity {
         catch (DAOAlreadyExistsException exception){
             exception.printStackTrace();
         }
+
+        gridViewMain = findViewById(R.id.MainGrid);
+        ArrayList<Integer> list = new ArrayList<Integer>() {{
+            add(R.drawable.sample_0);
+            add(R.drawable.sample_1);
+            add(R.drawable.sample_2);
+        }};
+        ImageAdapter imgAdpt  = new ImageAdapter(this,R.layout.category,list);
+        gridViewMain.setAdapter(imgAdpt);
+        gridViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Récupérer la clé permettant d'avoir les data
+                Intent intent = new Intent(MainActivity.this, DataListActivity.class);
+                intent.putExtra("category",view.toString());
+                startActivity(intent);
+            }
+        });
+
     }
 }

@@ -3,4 +3,16 @@
     <string name="ButtonCategory">Category</string>
     <string name="ImageCard">ImageCard</string>
     <string name="Item">Item</string>
+    <string name="ImageSheet">The image representing the item</string>
+    <string name="Edit">Editer</string>
+    <string name="Titre">Titre  </string>
+    <string name="Auteur">Auteur</string>
+    <string name="Description">Desc</string>
+    <string name="Date">Date</string>
+    <string name="Jour">Jour</string>
+    <string name="Mois">Mois</string>
+    <string name="Année">Année</string>
+    <string name="ImageButton">Choisir une image</string>
+    <string name="Ajouter">Ajouter</string>
+    <string name="AddNote">Nouvelle Note</string>
 </resources>

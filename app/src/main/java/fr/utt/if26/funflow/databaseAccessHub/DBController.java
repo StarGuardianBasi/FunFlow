@@ -37,7 +37,6 @@ public class DBController {
 
     private boolean open;
 
-
     /**
      * Database controller using basic DAO architecture
      * @param context context type variable

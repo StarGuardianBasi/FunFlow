@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             Category series = new Category(0, "Series", "");
             Category book = new Category(0, "Book", "");
             Category manga = new Category(0, "Manga", "");
-            Category anime = new Category(0, "anime", "");
+            Category anime = new Category(0, "Anime", "");
             Category videoGame = new Category(0, "Video Game", "");
             Category album = new Category(0, "Music Album", "");
 

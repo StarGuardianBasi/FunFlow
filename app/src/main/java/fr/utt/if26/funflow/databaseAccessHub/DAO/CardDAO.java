@@ -271,7 +271,7 @@ public class CardDAO extends SQLiteDAO<Card> {
      */
     @Override
     protected List<Card> cursorFetchList(Cursor c) {
-        if (c.getCount() == 0) return null;
+        if (c.getCount() == 0) return new ArrayList<Card>();
 
         List<Card> cards = new ArrayList<Card>();
 

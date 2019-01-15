@@ -1,76 +1,107 @@
 package fr.utt.if26.funflow;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import fr.utt.if26.funflow.databaseAccessHub.DBController;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DAOAlreadyExistsException;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DBControllerAlreadyOpenException;
-import fr.utt.if26.funflow.databaseAccessHub.exceptions.DBControllerNotOpenException;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static ArrayList<Integer> catId = new ArrayList<Integer>();
     GridView gridViewMain;
-    private DBController controller;
-
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.controller = new DBController(this);
+
+        if (!EasyPermissions.hasPermissions(this, galleryPermissions)){
+            EasyPermissions.requestPermissions(this, "Access for storage",
+                    101, galleryPermissions);
+            if(!EasyPermissions.hasPermissions(this,galleryPermissions))    
+            {
+                finish();
+            }
+        }
+        FunFlow.setController(new DBController(this));
         try{
-            this.controller.open();
-            Category movie = new Category(0, "Movie", "");
-            Category series = new Category(0, "Series", "");
-            Category book = new Category(0, "Book", "");
-            Category manga = new Category(0, "Manga", "");
-            Category anime = new Category(0, "Anime", "");
-            Category videoGame = new Category(0, "Video Game", "");
-            Category album = new Category(0, "Music Album", "");
+            FunFlow.getController().open();
+            Category movie = new Category(1, "Movies", "");
+            Category series = new Category(2, "TV Series", "");
+            Category book = new Category(4, "Books", "");
+            Category manga = new Category(5, "Japanese Culture", "");
+            Category videoGame = new Category(0, "Video Games", "");
+            Category album = new Category(3, "Music", "");
+            Category culture = new Category(6,"Travel and culture","");
+            Category others = new Category(7,"Others","");
 
-            this.controller.insert(movie);
-            this.controller.insert(series);
-            this.controller.insert(book);
-            this.controller.insert(manga);
-            this.controller.insert(anime);
-            this.controller.insert(videoGame);
-            this.controller.insert(album);
-        }
+            FunFlow.getController().getDataBase().execSQL("delete from " + "card_table");
+            FunFlow.getController().getDataBase().execSQL("delete from " + "categorie_table");
+            FunFlow.getController().getDataBase().execSQL("delete from " + "task_table");
+            FunFlow.getController().insertCategory(videoGame);
+            FunFlow.getController().insertCategory(movie);
+            FunFlow.getController().insertCategory(series);
+            FunFlow.getController().insertCategory(album);
+            FunFlow.getController().insertCategory(book);
+            FunFlow.getController().insertCategory(manga);
+            FunFlow.getController().insertCategory(culture);
+            FunFlow.getController().insertCategory(others);
 
-        catch (DBControllerAlreadyOpenException exception){
-            exception.printStackTrace();
-        }
+            Card moviecard = new Card("Saw","Un film d'horreur très sanglant.", Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.saw).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Movies"));
+            Card seriescard = new Card("Dr Who","Un voyageur immortel qui sauve le monde quotidiennement.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.drwho).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("TV Series"));
+            Card bookcard = new Card("Neogicia","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.neogicia).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Books"));
+            Card videoGamecard = new Card("Fire Emblem : Path of Radiance","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.por).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Video Games"));
+            Card albumcard = new Card("Origins","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.origins).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Music"));
+            Card mangacard = new Card("Re:Zero","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.rezero).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Japanese Culture"));
+            Card culturecard = new Card("Kyoto Castle","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.kyoto).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Travel and culture"));
+            Card othercard = new Card("Figurine Ashe du championnat","Une figurine célébrant le mondial de 2018.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.ashe).toString(),new Date(2018,10,13),"Riot Games",5,FunFlow.getController().fetchCategoryByName("Others"));
 
-        catch (DBControllerNotOpenException exception){
-            exception.printStackTrace();
-        }
 
-        catch (ClassNotFoundException exception){
-            exception.printStackTrace();
-        }
-
+            FunFlow.getController().insertCard(moviecard);
+            FunFlow.getController().insertCard(seriescard);
+            FunFlow.getController().insertCard(bookcard);
+            FunFlow.getController().insertCard(videoGamecard);
+            FunFlow.getController().insertCard(albumcard);
+            FunFlow.getController().insertCard(mangacard);
+            FunFlow.getController().insertCard(culturecard);
+            FunFlow.getController().insertCard(othercard);
+            }
         catch (DAOAlreadyExistsException exception){
             exception.printStackTrace();
+        } catch (DBControllerAlreadyOpenException e) {
+            e.printStackTrace();
         }
-
+        List<Card> CardsAll = FunFlow.getController().fetchListOfCards();
+        List<Category> CatAll = FunFlow.getController().fetchListOfCategories();
+        for(Category cat : CatAll) {
+            System.out.println(cat.getName());
+            catId.add((Integer) cat.getId());
+        }
         gridViewMain = findViewById(R.id.MainGrid);
-        ArrayList<Integer> list = new ArrayList<Integer>() {{
-        }};
+        ArrayList<Integer> list = new ArrayList<>();
         ImageAdapter imgAdpt  = new ImageAdapter(this,R.layout.category,list);
         gridViewMain.setAdapter(imgAdpt);
         gridViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Récupérer la clé permettant d'avoir les data
                 Intent intent = new Intent(MainActivity.this, DataListActivity.class);
-                intent.putExtra("category",view.toString());
+                intent.putExtra("category",catId.get(i));
                 startActivity(intent);
             }
         });
-
     }
 }

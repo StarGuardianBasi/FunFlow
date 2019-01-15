@@ -21,67 +21,178 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="?android:attr/listDivider" />
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/NewSheetTitle"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Titre"
-                    android:textSize="18sp" />
-
-                <View
-                    android:id="@+id/divider3"
-                    android:layout_width="8dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?android:attr/listDivider" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/NewSheetTitleEntry"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/NewSheetImageView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:contentDescription="@string/ImageSheet"
+                        tools:srcCompat="@tools:sample/avatars" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/NewSheetButtonChooseImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:text="@string/ImageButton" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/NewSheetAuthor"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Auteur"
-                    android:textSize="18sp" />
-
-                <View
-                    android:id="@+id/divider4"
-                    android:layout_width="8dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:background="?android:attr/listDivider" />
-
-                <EditText
-                    android:id="@+id/NewSheetAuthorEntry"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/NewSheetTitle"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Titre"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/divider10"
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/listDivider"
+                            android:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/NewSheetTitleEntry"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/NewSheetAuthor"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Auteur"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:background="?android:attr/listDivider"
+                            android:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/NewSheetAuthorEntry"
+                            android:layout_width="175dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/NewSheetCat"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Cat"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/listDivider"
+                            android:visibility="invisible" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/NewSheetDateJour"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Date"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/divider11"
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/listDivider"
+                            android:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/editDay"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/editMonth"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/editYear"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.hsalf.smilerating.SmileRating
+                            android:id="@+id/smile_rating"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -104,7 +215,7 @@
                     android:background="?android:attr/listDivider" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/NewSheetDescEntry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -113,72 +224,19 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/NewSheetDateJour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Jour"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/NewSheetDateJourSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:layout_width="wrap_content" />
-
-                <TextView
-                    android:id="@+id/NewSheetDateMois"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Mois"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/NewSheetDateMoisSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/newSheetDateAnnee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Année"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/NewSheetDateAnneeSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/NewSheetImageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/ImageSheet"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <Button
-                android:id="@+id/NewSheetButtonChooseImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ImageButton" />
+                android:layout_height="8dp"
+                android:background="?android:attr/listDivider"
+                android:visibility="invisible" />
 
             <View
                 android:id="@+id/divider6"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="wrap_content"
+                android:background="?android:attr/listDivider"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/NewSheetButtonAdd"

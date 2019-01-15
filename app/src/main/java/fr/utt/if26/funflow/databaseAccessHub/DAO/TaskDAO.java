@@ -52,7 +52,6 @@ public class TaskDAO extends SQLiteDAO<Task> {
     @Override
     public int update(Task obj) throws NullPointerException, DAOAlreadyExistsException{
         if (obj == null) throw  new NullPointerException("Task object is null");
-        if (fetchByID(obj.getId()) != null) throw new DAOAlreadyExistsException("The Task object with ID " + obj.getId() + " already exists");
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.TASK_COL_CARDID, obj.getCardID());

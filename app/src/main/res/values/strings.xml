@@ -15,4 +15,17 @@
     <string name="ImageButton">Choisir une image</string>
     <string name="Ajouter">Ajouter</string>
     <string name="AddNote">Nouvelle Note</string>
+    <string name="Cat">Catégorie</string>
+    <string name="Progress">Progrès</string>
+    <string name="Delete">Supprimer</string>
+    <string-array name="categories">
+        <item>Video Games</item>
+        <item>Movies</item>
+        <item>TV Series</item>
+        <item>Music</item>
+        <item>Books</item>
+        <item>Japanese Culture</item>
+        <item>Travel and Culture</item>
+        <item>Others</item>
+    </string-array>
 </resources>

@@ -35,8 +35,8 @@ public class CategoryDAO extends SQLiteDAO<Category> {
     @Override
     public long insert(Category obj) throws NullPointerException, DAOAlreadyExistsException {
         if (obj == null) throw new NullPointerException("Card object is null");
-        if (fetchByName(obj.getName()) != null) throw new DAOAlreadyExistsException("The Category object with name " + obj.getName() + " already exists");
-        if (fetchByID(obj.getId()) != null) throw new DAOAlreadyExistsException("The Category object with ID " + obj.getId() + " already exists");
+        //if (fetchByName(obj.getName()) != null) throw new DAOAlreadyExistsException("The Category object with name " + obj.getName() + " already exists");
+        //if (fetchByID(obj.getId()) != null) throw new DAOAlreadyExistsException("The Category object with ID " + obj.getId() + " already exists");
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.CATEGORY_COL_NAME, obj.getName());
@@ -173,8 +173,9 @@ public class CategoryDAO extends SQLiteDAO<Category> {
      */
     @Override
     protected Category cursorFetch(Cursor c) {
-        if (c.getCount() == 0) return null;
-
+        if (c.getCount() == 0) {
+            return new Category();
+        }
         c.moveToFirst();
 
         int numColID = c.getColumnIndex(DatabaseHelper.CATEGORY_COL_ID);

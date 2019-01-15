@@ -7,8 +7,14 @@ public class Task {
     private boolean isDone;
 
     public Task(){}
-    public Task(int id, int CardID, String description, boolean isDone){
+    public Task(int id, int CardID, String description, boolean isDone) {
         this.id = id;
+        this.CardID = CardID;
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public Task(int CardID, String description, boolean isDone){
         this.CardID = CardID;
         this.description = description;
         this.isDone = isDone;

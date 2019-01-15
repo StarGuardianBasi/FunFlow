@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class    DatabaseHelper extends SQLiteOpenHelper {
     public static final String CARD_TABLE = "card_table";
     public static final String CATEGORY_TABLE = "categorie_table";
     public static final String TASK_TABLE = "task_table";

@@ -26,7 +26,7 @@ public class DBController {
     }
 
     private static final String DBNAME = "funflow.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     private SQLiteDatabase db;
 
@@ -91,6 +91,11 @@ public class DBController {
     public CardDAO CardDataBaseManipulation(){
         return cardDAO;
     }
+
+    public TaskDAO TaskDataBaseManipulation(){
+        return taskDAO;
+    }
+
 
     /**
      * getter categoryDAO

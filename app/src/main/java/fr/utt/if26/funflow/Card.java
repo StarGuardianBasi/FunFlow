@@ -62,6 +62,24 @@ public class Card {
         this.tasks = new ArrayList<Task>();
     }
 
+    public Card(String name,
+                String description,
+                String image,
+                Date releaseDate,
+                String author,
+                int rating,
+                Category category){
+
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.releaseDate = releaseDate;
+        this.author = author;
+        this.rating = rating;
+        this.category = category;
+        this.tasks = new ArrayList<Task>();
+    }
+
     public int getId() {
         return id;
     }

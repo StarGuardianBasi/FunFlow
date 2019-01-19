@@ -1,6 +1,7 @@
 package fr.utt.if26.funflow;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import fr.utt.if26.funflow.databaseAccessHub.DBController;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DAOAlreadyExistsException;
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DBControllerAlreadyOpenException;
+import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     int RC_READ_AND_WRITE_PERMISSIONS = 1;
     GridView gridViewMain;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Category culture = new Category(6,"Travel and culture","");
             Category others = new Category(7,"Others","");
 
-            FunFlow.getController().getDataBase().execSQL("delete from " + "card_table");
+            //FunFlow.getController().getDataBase().execSQL("delete from " + "card_table");
             //FunFlow.getController().getDataBase().execSQL("delete from " + "categorie_table");
-            FunFlow.getController().getDataBase().execSQL("delete from " + "task_table");
+            //FunFlow.getController().getDataBase().execSQL("delete from " + "task_table");
             FunFlow.getController().insertCategory(videoGame);
             FunFlow.getController().insertCategory(movie);
             FunFlow.getController().insertCategory(series);
@@ -108,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     }
 
     public void onPermissionsDenied(int requestCode, List<String> list) {
-        finish();
+        Toast.makeText(this,"Autorisez l'application à lire le stockage externe dans les paramètres",Toast.LENGTH_LONG).show();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finishAffinity();
+            }
+        }, 200);
     }
 }

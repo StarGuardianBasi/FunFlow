@@ -57,7 +57,7 @@ public class NewSheetActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_new_sheet);
         final Intent intent = getIntent();
-        this. c = this;
+        this.c = this;
         title = findViewById(R.id.NewSheetTitleEntry);
         author = findViewById(R.id.NewSheetAuthorEntry);
         cat = findViewById(R.id.spinner);

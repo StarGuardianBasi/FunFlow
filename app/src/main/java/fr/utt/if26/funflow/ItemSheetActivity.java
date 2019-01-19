@@ -19,6 +19,7 @@ import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ItemSheetActivity extends AppCompatActivity {
 
@@ -52,7 +53,9 @@ public class ItemSheetActivity extends AppCompatActivity {
         author = findViewById(R.id.TextAuthorSheet);
         author.setText(item.getAuthor());
         date = findViewById(R.id.TextDateSheet);
-        date.setText(item.getReleaseDate().getDay() + "/" + item.getReleaseDate().getMonth() + "/" +item.getReleaseDate().getYear());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(item.getReleaseDate());
+        date.setText(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)) + "/" + Integer.toString(cal.get(Calendar.MONTH)) + "/" +Integer.toString(cal.get(Calendar.YEAR)-1900));
         iv = findViewById(R.id.ImageSheet);
         iv.setImageURI(Uri.parse(item.getImage()));
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);

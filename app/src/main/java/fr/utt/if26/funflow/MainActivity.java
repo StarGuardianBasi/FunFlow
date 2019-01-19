@@ -19,9 +19,10 @@ import fr.utt.if26.funflow.databaseAccessHub.exceptions.DAOAlreadyExistsExceptio
 import fr.utt.if26.funflow.databaseAccessHub.exceptions.DBControllerAlreadyOpenException;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     public static ArrayList<Integer> catId = new ArrayList<Integer>();
+    int RC_READ_AND_WRITE_PERMISSIONS = 1;
     GridView gridViewMain;
     private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     @Override
@@ -29,14 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!EasyPermissions.hasPermissions(this, galleryPermissions)){
-            EasyPermissions.requestPermissions(this, "Access for storage",
-                    101, galleryPermissions);
-            if(!EasyPermissions.hasPermissions(this,galleryPermissions))    
-            {
-                finish();
-            }
-        }
+        EasyPermissions.requestPermissions(this, "Access for storage", RC_READ_AND_WRITE_PERMISSIONS, galleryPermissions);
         FunFlow.setController(new DBController(this));
         try{
             FunFlow.getController().open();
@@ -50,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Category others = new Category(7,"Others","");
 
             FunFlow.getController().getDataBase().execSQL("delete from " + "card_table");
-            FunFlow.getController().getDataBase().execSQL("delete from " + "categorie_table");
+            //FunFlow.getController().getDataBase().execSQL("delete from " + "categorie_table");
             FunFlow.getController().getDataBase().execSQL("delete from " + "task_table");
             FunFlow.getController().insertCategory(videoGame);
             FunFlow.getController().insertCategory(movie);
@@ -61,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             FunFlow.getController().insertCategory(culture);
             FunFlow.getController().insertCategory(others);
 
-            Card moviecard = new Card("Saw","Un film d'horreur très sanglant.", Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.saw).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Movies"));
+            /*Card moviecard = new Card("Saw","Un film d'horreur très sanglant.", Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.saw).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Movies"));
             Card seriescard = new Card("Dr Who","Un voyageur immortel qui sauve le monde quotidiennement.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.drwho).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("TV Series"));
             Card bookcard = new Card("Neogicia","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.neogicia).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Books"));
             Card videoGamecard = new Card("Fire Emblem : Path of Radiance","Un film d'horreur très sanglant.",Uri.parse("android.resource://fr.utt.if26.funflow/" + R.drawable.por).toString(),new Date(2005,3,5),"James Wan",2,FunFlow.getController().fetchCategoryByName("Video Games"));
@@ -78,17 +72,15 @@ public class MainActivity extends AppCompatActivity {
             FunFlow.getController().insertCard(albumcard);
             FunFlow.getController().insertCard(mangacard);
             FunFlow.getController().insertCard(culturecard);
-            FunFlow.getController().insertCard(othercard);
+            FunFlow.getController().insertCard(othercard);*/
             }
         catch (DAOAlreadyExistsException exception){
             exception.printStackTrace();
         } catch (DBControllerAlreadyOpenException e) {
             e.printStackTrace();
         }
-        List<Card> CardsAll = FunFlow.getController().fetchListOfCards();
         List<Category> CatAll = FunFlow.getController().fetchListOfCategories();
         for(Category cat : CatAll) {
-            System.out.println(cat.getName());
             catId.add((Integer) cat.getId());
         }
         gridViewMain = findViewById(R.id.MainGrid);
@@ -103,5 +95,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+        finish();
     }
 }

@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
@@ -148,47 +150,51 @@ public class NewSheetActivity extends AppCompatActivity {
         aB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String category = "Tv Series";
-                switch(cat.getSelectedItemPosition()) {
-                    case 0:
-                        category = "Video Games";
-                        break;
-                    case 1:
-                        category = "Movies";
-                        break;
-                    case 2:
-                        category = "Tv Series";
-                        break;
-                    case 3:
-                        category = "Music";
-                        break;
-                    case 4:
-                        category = "Books";
-                        break;
-                    case 5:
-                        category = "Japanese Culture";
-                        break;
-                    case 6:
-                        category = "Travel and Culture";
-                        break;
-                    case 7:
-                        category = "Others";
-                        break;
-                    default:
-                        break;
+                if (TextUtils.isDigitsOnly(day.getText())||TextUtils.isDigitsOnly(day.getText())||TextUtils.isDigitsOnly(day.getText())) {
+                    String category = "Tv Series";
+                    switch (cat.getSelectedItemPosition()) {
+                        case 0:
+                            category = "Video Games";
+                            break;
+                        case 1:
+                            category = "Movies";
+                            break;
+                        case 2:
+                            category = "Tv Series";
+                            break;
+                        case 3:
+                            category = "Music";
+                            break;
+                        case 4:
+                            category = "Books";
+                            break;
+                        case 5:
+                            category = "Japanese Culture";
+                            break;
+                        case 6:
+                            category = "Travel and Culture";
+                            break;
+                        case 7:
+                            category = "Others";
+                            break;
+                        default:
+                            break;
+                    }
+                    if (intent.getStringExtra("item") != null) {
+                        Card card = FunFlow.getController().fetchCardByName(intent.getStringExtra("item"));
+                        Card c = new Card(card.getId(), title.getText().toString(), desc.getText().toString(), iv.getTag().toString(), new Date(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString())), author.getText().toString(), sm.getRating(), FunFlow.getController().fetchCategoryByName(category));
+                        FunFlow.getController().updateCard(c);
+                    } else {
+                        Card c = new Card(title.getText().toString(), desc.getText().toString(), iv.getTag().toString(), new Date(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString())), author.getText().toString(), sm.getRating(), FunFlow.getController().fetchCategoryByName(category));
+                        FunFlow.getController().insertCard(c);
+                    }
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else
+                {
+                    Toast.makeText(c,"Wrong Date", Toast.LENGTH_LONG);
                 }
-                if (intent.getStringExtra("item") != null){
-                    Card card = FunFlow.getController().fetchCardByName(intent.getStringExtra("item"));
-                    Card c = new Card(card.getId(),title.getText().toString(), desc.getText().toString(), iv.getTag().toString(), new Date(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString())), author.getText().toString(), sm.getRating(), FunFlow.getController().fetchCategoryByName(category));
-                    FunFlow.getController().updateCard(c);
-                }
-                else {
-                    Card c = new Card(title.getText().toString(), desc.getText().toString(), iv.getTag().toString(), new Date(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString())), author.getText().toString(), sm.getRating(), FunFlow.getController().fetchCategoryByName(category));
-                    FunFlow.getController().insertCard(c);
-                }
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
     }
